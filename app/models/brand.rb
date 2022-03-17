@@ -1,5 +1,5 @@
 class Brand < ApplicationRecord
-  validates :name, presence: true, length: {minimum:3}
+  validates :name, presence: true, length: {minimum:3}, uniqueness: true
   has_many :devices
   has_and_belongs_to_many :types
 end

@@ -11,7 +11,10 @@ gem "pg", "~> 1.1"
 gem 'jbuilder', '~> 2.11', '>= 2.11.5'
 gem 'devise', '~> 4.8', '>= 4.8.1'
 gem 'activeadmin', '~> 2.11'
-
+gem 'acts_as_api', '~> 1.0', '>= 1.0.1'
+gem 'paperclip', '~> 6.1'
+gem 'activestorage', '~> 7.0', '>= 7.0.2.3'
+gem 'uuid', '~> 2.3', '>= 2.3.9'
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
