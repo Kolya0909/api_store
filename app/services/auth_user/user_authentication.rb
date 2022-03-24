@@ -1,6 +1,6 @@
 module AuthUser
   class UserAuthentication
-    SECRET_KEY = 'azor'
+    SECRET_KEY = 'RTX_XFX'
     HASH_CODE = 'HS256'
 
     def initialize(email, user_id, role)
@@ -19,7 +19,8 @@ module AuthUser
       {
         :email=>@email,
         :user_id=>@user_id,
-        :role=>@role
+        :role=>@role,
+        :exp=>Time.now.to_i + 12000
       }
     end
 

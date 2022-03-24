@@ -1,31 +1,37 @@
 module AuthUser
   class UserAuthorize
-
+    SECRET_KEY = 'RTX_XFX'
     def initialize(headers = {})
       @headers = headers
     end
 
     def call
-      user
+      user_info
     end
 
     private
 
-    def user
-      @user = User.find(decode_auth_token[:user_id]) if decode_auth_token
+    attr_reader :headers
+
+    def user_info
+      decoded_auth_token  if decoded_auth_token
     end
 
-    def decode_auth_token
-      JWT.decode(http_auth_header)
+    def decoded_auth_token
+      begin
+        JWT.decode(http_auth_header, SECRET_KEY ) if http_auth_header
+      rescue JWT::ExpiredSignature
+      rescue JWT::VerificationError
+      rescue JWT::DecodeError
+      end
+
     end
 
     def http_auth_header
       if headers['Authorization'].present?
-        headers['Authorization'].split(' ').last
-      else
-        errors.add(:token,'Missing token')
+        return headers['Authorization'].split(' ').last
       end
-    end
-
+        nil
+      end
   end
 end

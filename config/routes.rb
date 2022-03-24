@@ -9,8 +9,9 @@ Rails.application.routes.draw do
       resources :baskets
       resources :basket_devices
       resources :device_infos
-      post '/user/registration'=>'users#registration'
-      get '/user/login'=> 'users#login'
+      post '/user/registration' => 'users#registration'
+      post '/user/login' => 'users#login'
+      get '/user/auth' => 'users#auth'
     end
   end
 

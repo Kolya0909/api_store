@@ -1,4 +1,5 @@
 class Api::V1::UsersController < ApplicationController
+  skip_before_action :authenticate_request
 
   def registration
     if User.find_by_email(params[:email])
@@ -17,15 +18,24 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def login
-    return render json: {massage: 'password or email invalid'} unless @user = User.find_by_email(params[:email])
+    return render json: { massage: 'password or email invalid' } unless @user = User.find_by_email(params[:email])
     if @user.authenticate(params[:password])
         token = AuthUser::UserAuthentication.new(@user.email,@user.id,@user.role).call
         render json: {token: token}
       else
-        render json: {massage: 'password or email invalid'}
+        render json: { massage: 'password or email invalid' }
     end
   end
 
+  def auth
+    if AuthUser::RegenerateToken.new(request.headers).call
+      render json: { token: AuthUser::RegenerateToken.new(request.headers).call}
+    else
+      render json: { error: 'Not Authorized' }, status: 401
+    end
+
+
+  end
 
   private
 
