@@ -11,10 +11,24 @@ class Api::V1::TypesController < ApplicationController
     end
   end
 
+  def update
+    @type = Type.find(params[:id])
+    if @type.update(type_params)
+      render json: @type
+    end
+  end
+
+  def destroy
+    @type = Type.find(params[:id])
+    if @type.destroy
+      render json: {massage: "type with id #{params[:id]}, was destroyed"}
+    end
+  end
+
   private
 
   def type_params
-    params.permit(:name)
+    params.require(:type).permit(:name)
   end
 
 end
