@@ -7,7 +7,23 @@ class Api::V1::DevicesController < ApplicationController
   def create
     @device = Device.new(device_params)
     if @device.save
+      @brands_types = BrandType.new(brand_id: params[:brand_id], type_id: params[:type_id])
+      @brands_types.save
       render json: @device
+    end
+  end
+
+  def update
+    @device = Device.find(params[:id])
+    if @device.update(device_params)
+      render json: {massage: "device with id #{params[:id]}, was updated"}
+    end
+  end
+
+  def destroy
+    @device = Device.find(params[:id])
+    if @device.destroy
+      render json: {massage: "device with id #{params[:id]}, was destroyed"}
     end
   end
 

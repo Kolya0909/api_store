@@ -20,8 +20,8 @@ class Api::V1::UsersController < ApplicationController
   def login
     return render json: { massage: 'password or email invalid' } unless @user = User.find_by_email(params[:email])
     if @user.authenticate(params[:password])
-        token = AuthUser::UserAuthentication.new(@user.email,@user.id,@user.role).call
-        render json: {token: token}
+      auth_info = AuthUser::UserAuthentication.new(@user.email,@user.id,@user.role).call
+        render json: {token: auth_info[:token]}
       else
         render json: { massage: 'password or email invalid' }
     end

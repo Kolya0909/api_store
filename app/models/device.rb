@@ -1,6 +1,6 @@
 class Device < ApplicationRecord
   has_one_attached :image
-  has_many :device_infos
-  has_many :ratings
-  has_many :basket_devices
+  has_many :device_infos, dependent: :destroy
+  has_many :ratings, dependent: :destroy
+  has_many :basket_devices, dependent: :destroy
 end

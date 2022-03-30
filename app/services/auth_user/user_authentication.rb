@@ -10,7 +10,10 @@ module AuthUser
     end
 
     def call
-      JWT.encode(payload,SECRET_KEY,HASH_CODE)
+      {
+        token: JWT.encode(payload,SECRET_KEY,HASH_CODE),
+        user: payload
+      }
     end
 
     private
