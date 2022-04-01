@@ -12,5 +12,9 @@ class Api::V1::RatingsController < ApplicationController
 
   end
 
+  def rating_params
+    params.permit(:user_id, :device_id, :rate)
+  end
+
 end
 
