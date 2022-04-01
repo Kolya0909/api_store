@@ -19,6 +19,6 @@ class ApplicationController < ActionController::API
     end
   end
 
-  ddd
+
 
 end
