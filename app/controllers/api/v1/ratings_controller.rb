@@ -8,4 +8,8 @@ class Api::V1::RatingsController < ApplicationController
 
   end
 
+  def update
+
+  end
+
 end
