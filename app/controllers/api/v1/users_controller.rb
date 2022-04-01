@@ -1,5 +1,6 @@
 class Api::V1::UsersController < ApplicationController
   skip_before_action :authenticate_request
+  skip_before_action :check_role
 
   def registration
     if User.find_by_email(params[:email])
@@ -33,14 +34,12 @@ class Api::V1::UsersController < ApplicationController
     else
       render json: { error: 'Not Authorized' }, status: 401
     end
-
-
   end
 
   private
 
   def user_params
-    params.permit(:email, :role, :password)
+    params.permit(:email, :password, :role)
   end
 
 end
