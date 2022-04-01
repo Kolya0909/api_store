@@ -105,7 +105,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_28_073522) do
   create_table "devices", force: :cascade do |t|
     t.string "name"
     t.integer "price"
-    t.integer "rating", default: 0
+    t.integer "rate", default: 0
     t.string "img"
     t.integer "type_id"
     t.integer "brand_id"
