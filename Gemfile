@@ -17,6 +17,7 @@ gem 'activestorage', '~> 7.0', '>= 7.0.2.3'
 gem 'uuid', '~> 2.3', '>= 2.3.9'
 gem 'jwt', '~> 2.3'
 gem 'bcrypt', '~> 3.1', '>= 3.1.17'
+gem 'rspec', '~> 3.11'
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
