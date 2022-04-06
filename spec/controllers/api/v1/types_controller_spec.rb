@@ -16,7 +16,7 @@ RSpec.describe Api::V1::TypesController, type: :controller do
 
   describe "POST create" do
 
-    context 'if customer is admin' do
+    context 'with customer admin' do
 
       it 'should return http_status_created' do
         user = {
@@ -28,6 +28,14 @@ RSpec.describe Api::V1::TypesController, type: :controller do
         request.headers['Authorization'] = "Bearer #{resp[:token]}"
         post :create, params: param, format: :json
         expect(response).to have_http_status(201)
+      end
+
+    end
+
+    context 'with customer role user' do
+      it 'should return un auth' do
+        post :create, params: param, format: :json
+        expect(response).to have_http_status(401)
       end
 
     end

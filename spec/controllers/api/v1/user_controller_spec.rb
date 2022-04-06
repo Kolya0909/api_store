@@ -18,6 +18,13 @@ RSpec.describe Api::V1::UsersController, type: :controller do
     }
   end
 
+  let (:invalid_login_params) do
+    {
+      email: 'lociko@ukr.net',
+      password: 'lociffko'
+    }
+  end
+
 
   describe 'registration' do
 
@@ -33,11 +40,31 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
   describe 'login' do
 
-    it 'return jwt token user' do
-      post :login, params: login_param, format: :json
-      expect(response).to have_http_status(:ok)
+    context 'with valid params' do
+      it 'return jwt token user' do
+        post :login, params: login_param, format: :json
+        expect(response).to have_http_status(:ok)
+      end
     end
 
+    context 'with invalid params' do
+
+      it 'should return password or email invalid' do
+        post :login, params: invalid_login_params, format: :json
+        resp_text = JSON.parse(response.body)
+        expect(resp_text["massage"]).to eq 'password or email invalid'
+      end
+
+      it 'should return email was used' do
+        post :registration, params: login_param, format: :json
+        resp_text = JSON.parse(response.body)
+        expect(resp_text["massage"]).to eq 'email was used'
+      end
+
+    end
+
+
   end
+
 
 end
