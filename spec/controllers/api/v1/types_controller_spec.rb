@@ -4,7 +4,7 @@ RSpec.describe Api::V1::TypesController, type: :controller do
 
   let(:param) do
     {
-      name: 'Computer'
+      name: 'Audio'
     }
   end
 

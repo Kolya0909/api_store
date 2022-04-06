@@ -14,7 +14,7 @@ class Api::V1::UsersController < ApplicationController
       end
     end
      if token.present?
-       render json: { token: token}
+       render json: token
      end
   end
 
@@ -30,7 +30,7 @@ class Api::V1::UsersController < ApplicationController
 
   def auth
     if AuthUser::RegenerateToken.new(request.headers).call
-      render json: { token: AuthUser::RegenerateToken.new(request.headers).call}
+      render json:  AuthUser::RegenerateToken.new(request.headers).call
     else
       render json: { error: 'Not Authorized' }, status: 401
     end
