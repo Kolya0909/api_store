@@ -1,7 +1,8 @@
 class Api::V1::DevicesController < ApplicationController
 
   def index
-    render json: DeviceFilter::DeviceFilterByTypeBrand.new(params).call
+    device = DeviceQuery.new(Device.all, search: params[:search], sort_by: params[:sort_by]).call
+    render json: device
   end
 
   def create
