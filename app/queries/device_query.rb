@@ -2,7 +2,9 @@ class DeviceQuery
 
   SORTING = {
     default: ->(scope) { scope.order(name: :asc) },
-    name_asc: ->(scope) { scope.order(name: :asc) }
+    name_asc: ->(scope) { scope.order(name: :asc) },
+    name_desc: ->(scope) { scope.order(name: :desc) },
+    type: ->(scope) {scope.where(type_id: Type.find(scope.type_id))}
   }.freeze
 
   def initialize(relation, search:, sort_by:)
